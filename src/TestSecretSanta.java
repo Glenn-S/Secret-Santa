@@ -10,22 +10,10 @@ public class TestSecretSanta {
         System.out.println(ss1.pickName("GLENN SKELTON"));
         System.out.println(ss1.pickName("glenn skelton"));
         System.out.println(ss1.pickName(""));
-/*
-        SecretSanta ss1 = new SecretSanta();
-        System.out.println(ss1.pickName("Glenn Skelton"));
-        System.out.println(ss1.pickName("Glenn Skelton"));
-        System.out.println(ss1.pickName("Glenn Skelton"));
-        System.out.println(ss1.pickName("Glenn Skelton"));
-        System.out.println(ss1.pickName("Glenn Skelton"));
-        System.out.println(ss1.pickName("Glenn Skelton"));
 
-        SecretSanta ss1 = new SecretSanta();
-        System.out.println(ss1.pickName("Glenn Skelton"));
-        System.out.println(ss1.pickName("Glenn Skelton"));
-        System.out.println(ss1.pickName("Glenn Skelton"));
-        System.out.println(ss1.pickName("Glenn Skelton"));
-        System.out.println(ss1.pickName("Glenn Skelton"));
-        System.out.println(ss1.pickName("Glenn Skelton"));
-*/
+        //ss1.createConfigFile(new ArrayList<Pair>(), "test2.txt");
+
+        SecretSanta ss2 = new SecretSanta();
+        ss2.createConfigFile(ss2.getFinalPairs(), "test2.txt");
     }
 }

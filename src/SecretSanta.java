@@ -12,16 +12,21 @@
  ******************************************************/
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.PrintWriter;
 import java.io.File;
 import java.io.IOException;
 import java.io.FileNotFoundException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Random;
+
+
 
 public class SecretSanta {
     private String FILE = "tests/config.txt"; // default value
     private ArrayList<Pair> pairs; // initial users storage
     private ArrayList<ArrayList<Pair>> santaPairs = new ArrayList<ArrayList<Pair>>();
-    public ArrayList<Pair> finalPairs; // final secret santa pairings
+    private ArrayList<Pair> finalPairs; // final secret santa pairings
 
 
     /*********************** CONSTRUCTORS **********************/
@@ -62,6 +67,47 @@ public class SecretSanta {
         }
         if (partner == null) partner = "Name not found. Please check spelling";
         return partner;
+    }
+
+    /**
+     * Purpose: To print out the pairs stored in the table passed in.
+     * @return void
+     */
+    public void printPairs(ArrayList<Pair> ps) {
+        for (Pair p : ps) System.out.println(p);
+    }
+
+    /**
+     *
+     */
+    public ArrayList<Pair> getFinalPairs() {
+        ArrayList<Pair> copyPairs = new ArrayList<Pair>();
+        for (Pair p : this.finalPairs) copyPairs.add(new Pair(p));
+        return copyPairs;
+    }
+
+    /**
+     * Purpose: To generate a configuration file based on the
+     * names passed in. Used for saving state or creating config
+     * file from GUI to create pairings.
+     */
+    public void createConfigFile(ArrayList<Pair> inputPairs, String filename) {
+        PrintWriter outFile = null;
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+
+        try {
+            outFile = new PrintWriter(new File("tests/" + filename));
+            outFile.println("# " + filename + " " + df.format(now) + "\n");
+            for (Pair p : inputPairs) outFile.println(p.getPartnerA() + " - " + p.getPartnerB());
+        } catch (IOException e) {
+            System.out.println("Error with opening " + filename);
+        } finally {
+            if (outFile != null) {
+                outFile.close();
+            }
+        }
+        return;
     }
 
     /**
@@ -117,7 +163,6 @@ public class SecretSanta {
             in.close();
         }
     }
-
 
     /**
      * Purpose: To generate the possible random outcomes given
@@ -220,14 +265,6 @@ public class SecretSanta {
                 names = swap(names, left, i);
             }
         }
-    }
-
-    /**
-     * Purpose: To print out the pairs stored in the table passed in.
-     * @return void
-     */
-    public void printPairs(ArrayList<Pair> ps) {
-        for (Pair p : ps) System.out.println(p);
     }
 
 }
