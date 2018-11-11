@@ -1,10 +1,10 @@
-/**
+/***********************************************************
  * @author Glenn Skelton
  * @version 1.0
- * @{date}
+ * Last modified: @{date}
  *
  * Purpose: Class for storing unordered pairs of partners.
- */
+ ***********************************************************/
 public class Pair {
     private String partnerA;
     private String partnerB;

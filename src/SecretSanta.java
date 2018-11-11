@@ -1,14 +1,13 @@
 /******************************************************
  * @author Glenn Skelton
  * @version 1.0
- * @{date}
+ * Last modified: @{date}
  *
  * Purpose: A Secret Santa pairings generator which
  * creates the unique pairings for a group of any size
  * while taking into account the pairings of couples to
  * ensure that they do not end up with each other.
  * HAPPY HOLIDAYS!
- *
  ******************************************************/
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -98,7 +97,12 @@ public class SecretSanta {
         LocalDateTime now = LocalDateTime.now();
 
         try {
-            outFile = new PrintWriter(new File("tests/" + filename));
+            File file = new File("tests/" + filename);
+            file.setReadable(false, false);
+            file.setWritable(true, true);
+            file.setExecutable(false, false);
+
+            outFile = new PrintWriter(file);
             outFile.println("# " + filename + " " + df.format(now) + "\n");
             for (Pair p : inputPairs)
                 outFile.println(p.getPartnerA() + " - " + p.getPartnerB());

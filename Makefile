@@ -1,4 +1,6 @@
-
+# Author: Glenn Skelton
+# Last Modified: November 11, 2018
+# Simple make file for building Secret Santa and dependencies
 
 JC = javac
 JVM = java
