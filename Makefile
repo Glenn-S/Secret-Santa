@@ -52,11 +52,20 @@ test2:
 #------------------------- CLEAN UP --------------------------#
 clean:
 ifeq ($(UNAME),Linux)
+ifneq ($(DIR_SIZE), 0)
 	$(RM) $(addprefix artifacts/,$(OBJ))
+else
+	@echo No files to remove
+endif
 endif
 ifeq ($(UNAME),Darwin)
+ifneq ($(DIR_SIZE), 0)
 	$(RM) $(addprefix artifacts/,$(OBJ))
+else
+	@echo No files to remove
 endif
+endif
+# haven't finished the windows side yet
 ifeq ($(UNAME),Windows)
 	$(del artifacts/*.class)
 endif
