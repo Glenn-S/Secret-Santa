@@ -4,7 +4,7 @@
 
 JC = javac
 JVM = java
-SRC = SecretSanta.java Pair.java
+SRC = SecretSanta.java Pair.java SecretSantaGUI.java
 DFLAG = -d artifacts/
 SFLAG = -sourcepath src/
 CPFLAG = -cp artifacts/
@@ -28,6 +28,9 @@ endif
 
 #------------------------ MAKE RULES -------------------------#
 all: Pair SecretSanta TestPair TestSecretSanta
+
+main: $(addprefix src/,SecretSantaGUI.java) Pair SecretSanta
+	$(JC) $(DFLAG) $(CPFLAG) $(addprefix src/,SecretSantaGUI.java)
 
 SecretSanta: $(addprefix src/,SecretSanta.java) Pair
 	$(JC) $(DFLAG) $(SFLAG) $(addprefix src/,SecretSanta.java)
