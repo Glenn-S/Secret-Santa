@@ -60,6 +60,14 @@ public class Pair {
     }
 
     /**
+     *
+     */
+    public String getPair(String name) {
+        if (this.getPartnerA().equals(name)) return this.getPartnerB();
+        else return null;
+    }
+
+    /**
      * Purpose: Returns true if the pairs have a name in common
      * else false.
      */

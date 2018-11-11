@@ -10,17 +10,20 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.IOException;
 import java.io.FileNotFoundException;
+import java.util.Random;
 
 public class SecretSanta {
     private String FILE = "tests/config.txt"; // default value
     private ArrayList<Pair> pairs;
     private ArrayList<ArrayList<Pair>> santaPairs = new ArrayList<ArrayList<Pair>>();
+    public ArrayList<Pair> finalPairs;
 
     // constructor
     public SecretSanta() {
         pairs = new ArrayList<Pair>();
         parseConfigFile(FILE);
         generateTables(santaPairs);
+        pickRandomPairs();
     }
 
     public SecretSanta(String filename) {
@@ -28,19 +31,34 @@ public class SecretSanta {
         pairs = new ArrayList<Pair>();
         parseConfigFile(FILE);
         generateTables(santaPairs);
-        System.out.println(pairs.size());
-        System.out.println("Size " + santaPairs.size());
+        pickRandomPairs();
     }
+
 
     /**
      * Purpose: To pick the random name that will be associated with
      * the sant for gift giving.
      */
     public String pickName(String santa) {
-        String elf = ""; // place holder
-        return elf;
+        String partner = null;
+        for (Pair p : finalPairs) {
+            String name = p.getPair(santa);
+            if (name != null) partner = name;
+            else continue;
+        }
+        return partner;
     }
 
+    private void pickRandomPairs() {
+        Random rand = new Random();
+        int index = (int)rand.nextInt(santaPairs.size()-1);
+        finalPairs = new ArrayList<Pair>();
+
+        for (Pair p : santaPairs.get(index)) {
+            System.out.println(p);
+            finalPairs.add(new Pair(p));
+        }
+    }
 
     /**
      *
@@ -90,6 +108,7 @@ public class SecretSanta {
         ArrayList<ArrayList<Pair>> pairings = new ArrayList<ArrayList<Pair>>();
         int totalOutcomes = 0;
 
+
         if (this.pairs.size() > 0) {
             // populate the outcomes and save them
             // iterate through each person
@@ -110,7 +129,7 @@ public class SecretSanta {
             Boolean valid = true;
             ArrayList<Pair> temp;
 
-            System.out.println(pairings.size());
+            //System.out.println(pairings.size());
             // filter out the pairings that are not allowed
             for (ArrayList<Pair> pairing : pairings) {
                 temp = new ArrayList<Pair>();
@@ -131,17 +150,18 @@ public class SecretSanta {
                 if (valid == false) continue; // don't add this array
                 else {
                     int ttlPairs = finalPairs.size();
-                    System.out.println(ttlPairs);
+                    //System.out.println(ttlPairs);
                     finalPairs.add(new ArrayList<Pair>());
                     for (Pair p : temp) {
-                        System.out.println(p);
+                        //System.out.println(p);
                         finalPairs.get(ttlPairs).add(new Pair(p));
                     }
                 }
             }
 
-            System.out.println(finalPairs.size());
+            System.out.println("Final Size " + finalPairs.size());
             // assign pairings to be the final pairings
+            return;
         }
         else {
             return;
@@ -199,8 +219,8 @@ public class SecretSanta {
     /**
      * Purpose: To print out the pairs stored in the table.
      */
-    public void printPairs() {
-        for (Pair p : pairs) System.out.println(p);
+    public void printPairs(ArrayList<Pair> ps) {
+        for (Pair p : ps) System.out.println(p);
     }
 
 }
