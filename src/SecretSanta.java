@@ -78,7 +78,8 @@ public class SecretSanta {
     }
 
     /**
-     *
+     * Purpose: To return the final pairs array.
+     * @return copyPairs - an array list of Pairs.
      */
     public ArrayList<Pair> getFinalPairs() {
         ArrayList<Pair> copyPairs = new ArrayList<Pair>();
@@ -99,7 +100,8 @@ public class SecretSanta {
         try {
             outFile = new PrintWriter(new File("tests/" + filename));
             outFile.println("# " + filename + " " + df.format(now) + "\n");
-            for (Pair p : inputPairs) outFile.println(p.getPartnerA() + " - " + p.getPartnerB());
+            for (Pair p : inputPairs)
+                outFile.println(p.getPartnerA() + " - " + p.getPartnerB());
         } catch (IOException e) {
             System.out.println("Error with opening " + filename);
         } finally {
