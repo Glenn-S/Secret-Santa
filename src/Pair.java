@@ -63,7 +63,7 @@ public class Pair {
      *
      */
     public String getPair(String name) {
-        if (this.getPartnerA().equals(name)) return this.getPartnerB();
+        if (this.getPartnerA().toUpperCase().equals(name.toUpperCase())) return this.getPartnerB();
         else return null;
     }
 
