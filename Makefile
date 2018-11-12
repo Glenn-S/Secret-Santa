@@ -27,16 +27,22 @@ ifeq (UNAME,Windows)
 endif
 
 #------------------------ MAKE RULES -------------------------#
+run: Pair SecretSanta SecretSantaGUI
+	$(JVM) $(CPFLAG) SecretSantaGUI
+
 all: Pair SecretSanta TestPair TestSecretSanta
 
 main: $(addprefix src/,SecretSantaGUI.java) Pair SecretSanta
 	$(JC) $(DFLAG) $(CPFLAG) $(addprefix src/,SecretSantaGUI.java)
 
+Pair: $(addprefix src/,Pair.java)
+	$(JC) $(DFLAG) $(addprefix src/,Pair.java)
+
 SecretSanta: $(addprefix src/,SecretSanta.java) Pair
 	$(JC) $(DFLAG) $(SFLAG) $(addprefix src/,SecretSanta.java)
 
-Pair: $(addprefix src/,Pair.java)
-	$(JC) $(DFLAG) $(addprefix src/,Pair.java)
+SecretSantaGUI: $(addprefix src/,SecretSantaGUI.java)
+	$(JC) $(DFLAG) $(CPFLAG) $(addprefix src/,SecretSantaGUI.java)
 
 TestSecretSanta: $(addprefix src/,TestSecretSanta.java) Pair SecretSanta
 	$(JC) $(DFLAG) $(CPFLAG) $(addprefix src/,TestSecretSanta.java)

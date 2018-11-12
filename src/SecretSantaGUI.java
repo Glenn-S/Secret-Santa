@@ -3,40 +3,61 @@
  *
  ***********************************************/
 
-import javafx.application.Application;
-import javafx.scene.*;
-import javafx.stage.*;
-import javafx.scene.layout.*;
-import java.time.LocalDateTime;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 
+public class SecretSantaGUI {
+    SecretSanta ss;
+    private final int winWidth = 500, winHeight = 300;
+    JFrame stage;
+    JTextField nameTF;
+    JLabel nameLbl = new JLabel("Please enter your full name");
+    JLabel secretName = new JLabel("");
+    JButton acceptBtn = new JButton("Get Secret Santa");
 
-public class SecretSantaGUI extends Application {
-    private final String appName = "Secret Santa " + LocalDateTime.now().format("yyyy");
-    private int winWidth = 300, winHeight = 300;
+    public SecretSantaGUI() {
+        ss = new SecretSanta();
+        ss.createConfigFile(ss.getFinalPairs(), "out.txt");
 
+        stage = new JFrame("Secret Santa");
+        stage.setSize(winWidth, winHeight);
+        stage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        stage.setVisible(true);
+        stage.setLayout(new FlowLayout(0, 10, 10));
+
+        nameTF = new JTextField(10);
+        nameTF.setEditable(true);
+        nameTF.setFocusable(true);
+
+        stage.add(nameLbl);
+        stage.add(nameTF);
+        stage.add(acceptBtn);
+        stage.add(secretName);
+
+        acceptBtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                SwingUtilities.invokeLater(new Runnable() {
+                    public void run() {
+                        // new  thread for fun
+                        String secretSanta = ss.pickName(nameTF.getText());
+                        secretName.setText(secretSanta);
+                    }
+                });
+            }
+        }); // set listner
+
+        // need to make it so that once somebody has gone, they can't go again
+
+    }
+    
     public static void main(String[] args) {
-        launch(args);
-    }
-
-    public void init() {
-
-    }
-
-    @Override
-    public void start(Stage myStage) {
-        myStage.setTitle("");
-
-        FlowPane fp = new FlowPane();
-
-        Scene myScene = new Scene(fp, winWidth, winHeight);
-        myStage.setScene(myScene);
-
-        myStage.show();
-
-    }
-
-    public void stop() {
-        // shutdown
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                // seperate thread
+                SecretSantaGUI stage = new SecretSantaGUI();
+            }
+        });
     }
 
 }
