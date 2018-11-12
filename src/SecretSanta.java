@@ -127,7 +127,7 @@ public class SecretSanta {
         finalPairs = new ArrayList<Pair>();
 
         for (Pair p : santaPairs.get(index)) {
-            System.out.println(p);
+            //System.out.println(p);
             finalPairs.add(new Pair(p));
         }
     }
