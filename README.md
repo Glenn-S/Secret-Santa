@@ -1,6 +1,6 @@
 Secret-Santa
 
-Authors: Kurtis Neidling, Glenn Skelton
+Authors: Kurtis Niedling, Glenn Skelton
 Date: November 5, 2018
 
 
