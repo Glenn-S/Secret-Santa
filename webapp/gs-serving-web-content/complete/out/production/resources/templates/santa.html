@@ -1,10 +1,14 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head> 
-    <title>Getting Started: Serving Web Content</title> 
+    <title>Secret Santa</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
+    <header role="banner">
+        <h1>Time To Find Your Secret Santa</h1>
+
+    </header>
     <p th:text="'Hello, ' + ${name} + ' , your santa is: ' + ${santa} + '!'" />
 </body>
 </html>

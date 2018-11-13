@@ -1,0 +1,5 @@
+# Configuration file for secret santa
+
+Karisa Gaul - Kurtis Niedling
+Jen Blencowe - Jesse Blencowe
+Gianna Read-Skelton - Glenn Skelton

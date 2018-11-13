@@ -5,10 +5,33 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
+    <!-- Example usage commented out now
     <h4>Names:</h4>
     <tr th:each="name: ${names}">
         <td th:text="${name}" />
         <br/>
     </tr>
+    -->
+
+    <form method="post">
+        <fieldset>
+            <h4>Add Names</h4>
+
+            <p class="name_input">
+                <label for="full-name">Full Name:</label>
+                <input type="text" id="partnerA" name="full-name" class="names" />
+            </p>
+            <p class="name_input">
+                <label for="full-name">Partners Name (optional):</label>
+                <input type="text" id="partnerB" name="full-name" class="names" />
+            </p>
+
+            <h4></h4>
+        </fieldset>
+
+        <!-- Submit Button -->
+        <input type="submit" value="Add" class="btn" />
+    </form>
+
 </body>
 </html>
