@@ -1,5 +1,6 @@
 package Santas;
 
+import Models.SecretSanta;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,22 +15,21 @@ import java.util.List;
  */
 @Controller
 public class SantaController {
+    private SecretSanta ss = new SecretSanta();
 
     @GetMapping("/list")
     public String list(Model model) {
         //TODO read from config
-        List<String> names = new ArrayList<String>();
-        names.add("Kurtis Niedling");
-        names.add("Karisa Gaul");
-        names.add("Glenn Skelton");
-        names.add("Gianna Read-Skelton");
-        model.addAttribute("names", names);
+
+        // this could be used to create a new config file
+        //model.addAttribute("names", names);
         return "list";
     }
 
     @GetMapping("/findSanta")
     public String findSanta(@RequestParam(name="name", required=true, defaultValue="test") String name, Model model) {
-        String santa = "me! (Kurtis)";
+        String santa = ss.pickName(name);
+        // update the web content
         model.addAttribute("name", name);
         model.addAttribute("santa", santa);
         return "santa";

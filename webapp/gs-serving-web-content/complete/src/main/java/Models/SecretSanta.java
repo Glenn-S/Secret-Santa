@@ -11,6 +11,8 @@ package Models;
  * ensure that they do not end up with each other.
  * HAPPY HOLIDAYS!
  ******************************************************/
+import org.springframework.util.ResourceUtils;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.PrintWriter;
@@ -24,7 +26,7 @@ import java.util.Random;
 
 
 public class SecretSanta {
-    private String FILE = "tests/config.txt"; // default value
+    private String FILE = "config.txt"; // default value
     private ArrayList<Pair> pairs; // initial users storage
     private ArrayList<ArrayList<Pair>> santaPairs = new ArrayList<ArrayList<Pair>>();
     private ArrayList<Pair> finalPairs; // final secret santa pairings
@@ -144,7 +146,8 @@ public class SecretSanta {
         Scanner in = null;
 
         try { // safely open the file
-            in = new Scanner(new File(filename));
+            File file = ResourceUtils.getFile("classpath:" + filename);
+            in = new Scanner(file);
         } catch (FileNotFoundException e) {
             System.out.println(filename + " could not be found");
             e.printStackTrace();
