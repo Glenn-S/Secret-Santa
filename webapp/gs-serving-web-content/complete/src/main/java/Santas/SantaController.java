@@ -1,14 +1,11 @@
 package Santas;
 
-import Models.SecretSanta;
+import Models.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by kurtis on 2018-11-11.
@@ -16,6 +13,7 @@ import java.util.List;
 @Controller
 public class SantaController {
     private SecretSanta ss = new SecretSanta();
+
 
     @GetMapping("/list")
     public String list(Model model) {
@@ -26,13 +24,28 @@ public class SantaController {
         return "list";
     }
 
-    @GetMapping("/findSanta")
-    public String findSanta(@RequestParam(name="name", required=true, defaultValue="test") String name, Model model) {
-        String santa = ss.pickName(name);
-        // update the web content
-        model.addAttribute("name", name);
-        model.addAttribute("santa", santa);
-        return "santa";
+
+    /* --------------------------- GET/POST santa.html ------------------------- */
+
+    @GetMapping("/santa")
+    public String santaFormGet(Model model) {
+        String santaPick = "";
+        model.addAttribute("santaPick", santaPick);
+        return "santa"; // get request to return the santa.html page
     }
 
+    @PostMapping("/santa")
+    public String santaFormPost(@RequestParam("santaName") String santa, ModelMap model) {
+        String santaPick = ss.pickName(santa);
+
+        // update the variable in the santa page
+        if (santaPick.equals("Name not found. Please check spelling")) {
+            model.put("santaPick", santaPick);
+        }
+        else {
+            model.put("santaPick", "You picked " + santaPick + "!");
+        }
+        return "santa"; // open the page back up again
+    }
 }
+

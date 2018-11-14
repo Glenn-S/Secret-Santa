@@ -10,9 +10,42 @@
     </header>
 
     <main>
-
-        <p th:text="'Hello, ' + ${name} + ' , your santa is: ' + ${santa} + '!'" />
+        <form method="post" action="santa">
+            <p>Full Name: <input type="text" name="santaName" /></p>
+            <input type="submit" name="Submit" />
+        </form>
+        <p th:text="${santaPick}" />
     </main>
 
 </body>
 </html>
+
+
+
+
+<!--
+        <form name="findSanta" th:action="getSantaPair" method="POST">
+            <h3>Let's Find Your Secret Santa</h3>
+
+            <label for="santaFor">Full Name:</label>
+            <input type="text"
+                   maxlength="255"
+                   autocomplete="true"
+                   autofocus="true"
+                   autocapitalize="on"
+                   placeholder="ie. Jane Doe"
+                   required
+                   name="santaInput"
+                   id="santaFor" />
+
+            <input type="submit"
+                   value="Submit"
+                   class="btn"
+                   action="getSantaPairing"
+                   method="POST" />
+
+        </form>
+        <p id="santaOf"></p>
+-->
+<!-- <p th:text="'Hello, ' + ${santa.santa} + ' , you are Santa for: ' + ${santa.name} + '!'" /> -->
+<!-- <p th:text="'Hello, ' + ${name} + ' , you are Santa for: ' + ${santa} + '!'" /> -->
