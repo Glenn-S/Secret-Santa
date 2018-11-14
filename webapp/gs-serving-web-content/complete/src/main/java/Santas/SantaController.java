@@ -11,6 +11,10 @@ import java.util.ArrayList;
 
 /**
  * Created by kurtis on 2018-11-11.
+ * Modified by Glenn Skelton: 14-11-2018
+ *
+ * the system will print the error message if there aren't three singles in the list
+ * or at least 2 pairs or a pair and 2 singles. (this is expected behaviour).
  */
 @Controller
 public class SantaController {
@@ -25,7 +29,6 @@ public class SantaController {
         // start blank list everytime this page is loaded
         // if back button from another page is pressed, this information remains though
         pairings = new ArrayList<Pair>();
-        System.out.println("size=" + pairings.size());
         return "list";
     }
 
@@ -35,9 +38,10 @@ public class SantaController {
                             ModelMap model) {
         // add to the ArrayList to create a configuration file
         Pair newPair = !partnerB.equals("") ? new Pair(partnerA, partnerB) : new Pair(partnerA);
+
+        // need to check and make sure no duplicates are being added
         pairings.add(newPair);
 
-        //System.out.println(newPair); // for test purposes
         System.out.println("size=" + pairings.size());
         return "list";
     }

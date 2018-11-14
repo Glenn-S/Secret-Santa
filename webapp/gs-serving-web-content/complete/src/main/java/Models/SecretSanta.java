@@ -57,6 +57,7 @@ public class SecretSanta {
         setPairs(pairings); // sets the initial pairs
         generateTables(santaPairs);
         pickRandomPairs();
+        System.out.println("final pairs size : " + finalPairs.size());
     }
 
 
@@ -78,9 +79,7 @@ public class SecretSanta {
             }
             if (partner == null) partner = errMsg1;
         }
-
         else partner = errMsg2;
-
 
         return partner;
     }
@@ -94,8 +93,8 @@ public class SecretSanta {
         if (copyPairs != null) {
             for (Pair p : copyPairs) {
                 this.pairs.add(p);
-                System.out.println(p);
             }
+            printPairs(this.pairs); // for debugging
         }
     }
 
@@ -116,10 +115,6 @@ public class SecretSanta {
     public void printPairs(ArrayList<Pair> ps) {
         for (Pair p : ps) System.out.println(p);
     }
-
-
-
-
 
     /**
      * Purpose: To generate a configuration file based on the
@@ -152,6 +147,8 @@ public class SecretSanta {
     }
 
 
+
+
     /*********************** PRIVATE METHODS ********************************/
 
     /**
@@ -165,18 +162,12 @@ public class SecretSanta {
 
         if (santaPairs.size() > 1) {
             index = (int)rand.nextInt(santaPairs.size()-1);
-
             finalPairs = new ArrayList<Pair>();
 
             for (Pair p : santaPairs.get(index)) {
-                //System.out.println(p);
                 finalPairs.add(new Pair(p));
             }
         }
-
-        else return;
-
-
     }
 
     /**
@@ -322,3 +313,5 @@ public class SecretSanta {
     }
 
 }
+
+
