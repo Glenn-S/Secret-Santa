@@ -5,56 +5,66 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-
+    <main>
     <!-- need to style with CSS -->
 
-    <form method="post" action="listEntry">
-        <fieldset>
-            <h4>Secret Santa Registry</h4>
+        <form method="post" action="listEntry">
+            <fieldset>
+                <h4>Secret Santa Registry</h4>
 
-            <!-- need to link up to the SantaController to add names to the list -->
-            <p class="name_input">
-                <label>Full Name:</label>
-                <input type="text"
-                       maxlength="255"
-                       autocomplete="true"
-                       autofocus="true"
-                       autocapitalize="on"
-                       placeholder="ie. Jane Doe"
-                       required
-                       name="partnerA"
-                       class="names" />
-                <!-- input needs to be checked to make sure that there are no free hyphens since that is what is used
-                for parsing the config.txt file -->
+                <!-- need to link up to the SantaController to add names to the list -->
+                <p class="name_input">
+                    <label>Full Name:</label>
+                    <input type="text"
+                           maxlength="255"
+                           autocomplete="true"
+                           autofocus="true"
+                           autocapitalize="on"
+                           placeholder="ie. Jane Doe"
+                           required
+                           name="partnerA"
+                           class="names" />
+                    <!-- input needs to be checked to make sure that there are no free hyphens since that is what is used
+                    for parsing the config.txt file -->
 
-            </p>
-            <p class="name_input">
-                <label>Partners Name:</label>
-                <input type="text"
-                       maxlength="255"
-                       autocomplete="true"
-                       autocapitalize="on"
-                       placeholder="Optional"
-                       name="partnerB"
-                       class="names"  />
-            </p>
+                </p>
+                <p class="name_input">
+                    <label>Partners Name:</label>
+                    <input type="text"
+                           maxlength="255"
+                           autocomplete="true"
+                           autocapitalize="on"
+                           placeholder="Optional"
+                           name="partnerB"
+                           class="names"  />
+                </p>
 
-            <!-- I want to make an admin login page possibly for authentication and to store associated santa file?
-             That or each person registers so that they can retrieve only their own secret santa pick  maybe?-->
+                <!-- I want to make an admin login page possibly for authentication and to store associated santa file?
+                That or each person registers so that they can retrieve only their own secret santa pick  maybe?-->
 
-            <!-- Submit Button -->
-            <input type="submit" name="submit" value="Add" class="btn" />
+                <!-- Submit Button -->
+                <input type="submit" name="submit" value="Add" class="btn" />
 
-        </fieldset>
-    </form>
+                <!-- print out confirmation or error message -->
+                <p th:text="${message}" /> <!-- doesn't appear to work, don't know why -->
+            </fieldset>
+        </form>
 
-    <!-- Clear Form Entries -->
-    <form method="post" action="clearEntries">
-        <input type="submit" name="clear" value="Clear" class="btn" />
-    </form>
+        <!-- Clear Form Entries -->
+        <form method="post" action="clearEntries">
+            <input type="submit" name="clear" value="Clear" class="btn" />
+        </form>
 
-    <input type="button" name="gotoSanta" onclick="location.href='santa'" value="Finish" class="btn" />
-    <input type="button" name="goHome" onclick="location.href='/'" value="Home" class="btn" />
+
+        <!-- continue on to the santa page -->
+        <input type="button" name="gotoSanta" onclick="location.href='santa'" value="Finish" class="btn" />
+
+
+        <!-- go back to the main page -->
+        <input type="button" name="goHome" onclick="location.href='/'" value="Home" class="btn" />
+
+
+    </main>
 
 </body>
 </html>

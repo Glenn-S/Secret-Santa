@@ -91,6 +91,15 @@ public class Pair {
         else return null;
     }
 
+    public Boolean exists(Pair pair) {
+        Boolean exists = this.getPartnerA().equals(pair.getPartnerA()) ||
+                         this.getPartnerB().equals(pair.getPartnerB()) ||
+                         this.getPartnerA().equals(pair.getPartnerB()) ||
+                         this.getPartnerB().equals(pair.getPartnerA());
+        return exists; // if name is already in the table it should not be allowed again
+
+    }
+
     /**
      * Purpose: Returns true if the pairs have a name in common
      * else false.
@@ -98,12 +107,9 @@ public class Pair {
      * pairing else false
      */
     public Boolean compare(Pair pair) {
-        Boolean comp =
-                (this.getPartnerA().equals(pair.getPartnerA()) &&
-                        this.getPartnerB().equals(pair.getPartnerB())) ||
-                        (this.getPartnerA().equals(pair.getPartnerB()) &&
-                                this.getPartnerB().equals(pair.getPartnerA()));
-        return comp; //
+        Boolean comp = (this.getPartnerA().equals(pair.getPartnerA()) && this.getPartnerB().equals(pair.getPartnerB())) ||
+                       (this.getPartnerA().equals(pair.getPartnerB()) && this.getPartnerB().equals(pair.getPartnerA()));
+        return comp;
     }
 
     /**

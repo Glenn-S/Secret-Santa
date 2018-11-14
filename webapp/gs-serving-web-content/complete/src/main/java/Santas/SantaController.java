@@ -19,16 +19,19 @@ import java.util.ArrayList;
 @Controller
 public class SantaController {
     private SecretSanta ss; // session copy of SecretSanta so that pairings stay the same
+
+    // ?is there a way to make this "global" access for if we split list into its own controller?
     private ArrayList<Pair> pairings; // storage for pairings from list page
 
 
     /* ------------------------- GET/POST list.html ---------------------------- */
 
     @RequestMapping("/list")
-    public String list(Model model) {
+    public String list(ModelMap model) {
         // start blank list everytime this page is loaded
         // if back button from another page is pressed, this information remains though
         pairings = new ArrayList<Pair>();
+        model.addAttribute("message", ""); // for conveying error messages
         return "list";
     }
 
@@ -38,19 +41,34 @@ public class SantaController {
                             ModelMap model) {
         // add to the ArrayList to create a configuration file
         Pair newPair = !partnerB.equals("") ? new Pair(partnerA, partnerB) : new Pair(partnerA);
+        String retMsg = "";
 
         // need to check and make sure no duplicates are being added
-        pairings.add(newPair);
+        for (Pair p : pairings) {
+            if (p.exists(newPair)) {
+                // print error message
+                model.put("message", "A name you entered already exists in the database");
+                return "list"; // don't add the pair since one of the names already exists
+            }
+        }
+        if (newPair.size() == 1) {
+            retMsg = newPair.getPartnerA() + " has been added!";
+            pairings.add(newPair);
+        }
+        else if (newPair.size() == 2) {
+            retMsg = newPair.getPartnerA() + " and " + newPair.getPartnerB() + " have been added!";
+            pairings.add(newPair);
+        }
+        else retMsg = "Error in adding pair, please try again";
 
-        System.out.println("size=" + pairings.size());
+        model.put("message", retMsg); // print out user message
+
         return "list";
     }
 
     @RequestMapping(value="/clearEntries", params="clear", method=RequestMethod.POST)
     public String clearEntries() {
-
-        pairings = new ArrayList<Pair>();
-        System.out.println("size=" + pairings.size());
+        pairings = new ArrayList<Pair>(); // clear the list by making new one
         return "list";
     }
 
@@ -64,7 +82,7 @@ public class SantaController {
         // read in the pairings entered by the user and generate pairings
         ss = new SecretSanta(pairings);
 
-        model.addAttribute("santaPick", "");
+        model.addAttribute("santaPick", "Hello");
         return "santa"; // get request to return the santa.html page
     }
 
