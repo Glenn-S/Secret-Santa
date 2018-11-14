@@ -6,6 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+
 
 /**
  * Created by kurtis on 2018-11-11.
@@ -13,14 +15,27 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class SantaController {
     private SecretSanta ss = new SecretSanta();
+    private ArrayList<Pair> pairs = new ArrayList<Pair>(); // possibly for creating config file
 
 
     @GetMapping("/list")
     public String list(Model model) {
-        //TODO read from config
+        return "list";
+    }
 
-        // this could be used to create a new config file
-        //model.addAttribute("names", names);
+    @RequestMapping(value="/list", params="submitPair", method=RequestMethod.POST)
+    public String formPost(@RequestParam("partnerA") String partnerA,
+                           @RequestParam("partnerB") String partnerB,
+                           ModelMap model) {
+        // add to the ArrayList to create a configuration file
+        Pair newPair;
+        newPair = !partnerB.equals("") ? new Pair(partnerA, partnerB) : new Pair(partnerA);
+        return "list";
+    }
+
+    @RequestMapping(value="/list", params="generateConfig", method=RequestMethod.POST)
+    public String createConfigFile() {
+        System.out.println("Generating Config File");
         return "list";
     }
 
@@ -37,6 +52,8 @@ public class SantaController {
     @PostMapping("/santa")
     public String santaFormPost(@RequestParam("santaName") String santa, ModelMap model) {
         String santaPick = ss.pickName(santa);
+
+        // perhaps need to limit it so that once somebody has picked they can't look again
 
         // update the variable in the santa page
         if (santaPick.equals("Name not found. Please check spelling")) {
