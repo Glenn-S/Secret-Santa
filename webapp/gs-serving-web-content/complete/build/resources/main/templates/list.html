@@ -8,7 +8,7 @@
 
     <!-- need to style with CSS -->
 
-    <form method="post" action="list">
+    <form method="post" action="listEntry">
         <fieldset>
             <h4>Secret Santa Registry</h4>
 
@@ -43,13 +43,17 @@
              That or each person registers so that they can retrieve only their own secret santa pick  maybe?-->
 
             <!-- Submit Button -->
-            <input type="submit" name="submitPair" value="Add" class="btn" />
+            <input type="submit" name="submit" value="Add" class="btn" />
+
         </fieldset>
-
-
-        <!-- Generate Configuration File -->
-        <input type="button" name="generateConfig" value="Finish" class="btn" />
     </form>
+
+    <!-- Clear Form Entries -->
+    <form method="post" action="clearEntries">
+        <input type="submit" name="clear" value="Clear" class="btn" />
+    </form>
+
+    <input type="button" name="gotoSanta" onclick="location.href='santa'" value="Finish" class="btn" />
 
 
 </body>

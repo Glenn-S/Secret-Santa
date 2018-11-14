@@ -26,17 +26,17 @@ import java.util.Random;
 
 
 public class SecretSanta {
+    public String errMsg1 = "Name not found. Please check spelling";
+    public String errMsg2 = "Not enough names have been entered into the database. Please go back and add the participants";
+
     private String FILE = "config.txt"; // default value
-    private ArrayList<Pair> pairs; // initial users storage
+    private ArrayList<Pair> pairs = new ArrayList<Pair>(); // initial users storage
     private ArrayList<ArrayList<Pair>> santaPairs = new ArrayList<ArrayList<Pair>>();
-    private ArrayList<Pair> finalPairs; // final secret santa pairings
+    private ArrayList<Pair> finalPairs = new ArrayList<Pair>(); // final secret santa pairings
 
 
     /*********************** CONSTRUCTORS **********************/
     public SecretSanta() {
-        // use default configuration file name
-        pairs = new ArrayList<Pair>();
-
         // instantiate the tables and pick the random set
         parseConfigFile(FILE);
         generateTables(santaPairs);
@@ -45,7 +45,6 @@ public class SecretSanta {
 
     public SecretSanta(String filename) {
         FILE = filename == null ? FILE : new String(filename);
-        pairs = new ArrayList<Pair>();
 
         // instantiate the tables and pick the random set
         parseConfigFile(FILE);
@@ -53,8 +52,16 @@ public class SecretSanta {
         pickRandomPairs();
     }
 
+    public SecretSanta(ArrayList<Pair> pairings) {
+        // instantiate the tables and pick the random set
+        setPairs(pairings); // sets the initial pairs
+        generateTables(santaPairs);
+        pickRandomPairs();
+    }
+
 
     /******************** HELPER METHODS ***********************/
+
 
     /**
      * Purpose: To pick the random name that will be associated with
@@ -63,21 +70,32 @@ public class SecretSanta {
      */
     public String pickName(String santa) {
         String partner = null;
-        for (Pair p : finalPairs) {
-            String name = p.getPair(santa);
-            if (name != null) partner = name;
-            else continue;
+        if (finalPairs.size() > 1) {
+            for (Pair p : finalPairs) {
+                String name = p.getPair(santa);
+                if (name != null) partner = name;
+                else continue;
+            }
+            if (partner == null) partner = errMsg1;
         }
-        if (partner == null) partner = "Name not found. Please check spelling";
+
+        else partner = errMsg2;
+
+
         return partner;
     }
 
     /**
-     * Purpose: To print out the pairs stored in the table passed in.
-     * @return void
+     * Purpose: To copy over an ArrayList of Pairs.
+     * @param copyPairs
      */
-    public void printPairs(ArrayList<Pair> ps) {
-        for (Pair p : ps) System.out.println(p);
+    public void setPairs(ArrayList<Pair> copyPairs) {
+        pairs = new ArrayList<Pair>();
+        if (copyPairs != null) {
+            for (Pair p : copyPairs) {
+                this.pairs.add(p);
+            }
+        }
     }
 
     /**
@@ -89,6 +107,18 @@ public class SecretSanta {
         for (Pair p : this.finalPairs) copyPairs.add(new Pair(p));
         return copyPairs;
     }
+
+    /**
+     * Purpose: To print out the pairs stored in the table passed in.
+     * @return void
+     */
+    public void printPairs(ArrayList<Pair> ps) {
+        for (Pair p : ps) System.out.println(p);
+    }
+
+
+
+
 
     /**
      * Purpose: To generate a configuration file based on the
@@ -120,6 +150,9 @@ public class SecretSanta {
         return;
     }
 
+
+    /*********************** PRIVATE METHODS ********************************/
+
     /**
      * Purpose: To randomly pick a set of pairings and store import junit.framework.TestCase;
      * in the finalPairs array for use by pickName().
@@ -127,13 +160,22 @@ public class SecretSanta {
      */
     private void pickRandomPairs() {
         Random rand = new Random();
-        int index = (int)rand.nextInt(santaPairs.size()-1);
-        finalPairs = new ArrayList<Pair>();
+        int index;
 
-        for (Pair p : santaPairs.get(index)) {
-            //System.out.println(p);
-            finalPairs.add(new Pair(p));
+        if (santaPairs.size() > 1) {
+            index = (int)rand.nextInt(santaPairs.size()-1);
+
+            finalPairs = new ArrayList<Pair>();
+
+            for (Pair p : santaPairs.get(index)) {
+                //System.out.println(p);
+                finalPairs.add(new Pair(p));
+            }
         }
+
+        else return;
+
+
     }
 
     /**
