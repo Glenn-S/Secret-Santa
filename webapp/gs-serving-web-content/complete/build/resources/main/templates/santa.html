@@ -20,8 +20,15 @@
                                  required
                                  name="santaName" /></p>
 
-            <input type="submit" name="Submit" />
+            <input type="submit" value="Submit" />
         </form>
+
+        <!-- return with list intact -->
+        <form method="get" action="goBack">
+            <input type="submit" name="returnToList" value="Go Back" />
+            <input type="button" onclick="location.href='list'" value="Clear Entries" />
+        </form>
+
 
         <!-- appears only when user presses submit -->
         <p th:text="${santaPick}" />

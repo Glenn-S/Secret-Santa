@@ -70,7 +70,7 @@ public class SecretSanta {
      */
     public String pickName(String santa) {
         String partner = null;
-        if (finalPairs.size() > 1) {
+        if (finalPairs.size() > 0) {
             for (Pair p : finalPairs) {
                 String name = p.getPair(santa);
                 if (name != null) partner = name;
@@ -94,6 +94,7 @@ public class SecretSanta {
         if (copyPairs != null) {
             for (Pair p : copyPairs) {
                 this.pairs.add(p);
+                System.out.println(p);
             }
         }
     }

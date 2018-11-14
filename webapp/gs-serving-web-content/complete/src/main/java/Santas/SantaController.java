@@ -14,8 +14,8 @@ import java.util.ArrayList;
  */
 @Controller
 public class SantaController {
-    private SecretSanta ss;
-    private ArrayList<Pair> pairings;
+    private SecretSanta ss; // session copy of SecretSanta so that pairings stay the same
+    private ArrayList<Pair> pairings; // storage for pairings from list page
 
 
     /* ------------------------- GET/POST list.html ---------------------------- */
@@ -37,7 +37,7 @@ public class SantaController {
         Pair newPair = !partnerB.equals("") ? new Pair(partnerA, partnerB) : new Pair(partnerA);
         pairings.add(newPair);
 
-        System.out.println(newPair); // for test purposes
+        //System.out.println(newPair); // for test purposes
         System.out.println("size=" + pairings.size());
         return "list";
     }
@@ -55,7 +55,7 @@ public class SantaController {
 
     @GetMapping("/santa")
     public String santaFormGet(ModelMap model) {
-        System.out.println("size=" + pairings.size());
+        //System.out.println("size=" + pairings.size());
 
         // read in the pairings entered by the user and generate pairings
         ss = new SecretSanta(pairings);
@@ -80,32 +80,10 @@ public class SantaController {
         return "santa"; // open the page back up again
     }
 
- /*
-    private SecretSanta ss = new SecretSanta();
-
-
-    @GetMapping("/santa")
-    public String santaFormGet(Model model) {
-        String santaPick = "";
-        model.addAttribute("santaPick", santaPick);
-        return "santa"; // get request to return the santa.html page
+    @RequestMapping(value="/goBack", params="returnToList", method=RequestMethod.GET)
+    public String goBack() {
+        return "list"; // return to the list page and clear the list
     }
 
-    @PostMapping("/santa")
-    public String santaFormPost(@RequestParam("santaName") String santa, ModelMap model) {
-        String santaPick = ss.pickName(santa);
-
-        // perhaps need to limit it so that once somebody has picked they can't look again
-
-        // update the variable in the santa page
-        if (santaPick.equals("Name not found. Please check spelling")) {
-            model.put("santaPick", santaPick);
-        }
-        else {
-            model.put("santaPick", "You picked " + santaPick + "!");
-        }
-        return "santa"; // open the page back up again
-    }
-*/
 }
 
