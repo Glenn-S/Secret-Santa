@@ -15,8 +15,10 @@ import java.util.ArrayList;
 @Controller
 public class SantaController {
     private SecretSanta ss = new SecretSanta();
-    private ArrayList<Pair> pairs = new ArrayList<Pair>(); // possibly for creating config file
+    //private ArrayList<Pair> pairs = new ArrayList<Pair>(); // possibly for creating config file
 
+
+    /* ------------------------- GET/POST list.html ---------------------------- */
 
     @GetMapping("/list")
     public String list(Model model) {
@@ -30,12 +32,17 @@ public class SantaController {
         // add to the ArrayList to create a configuration file
         Pair newPair;
         newPair = !partnerB.equals("") ? new Pair(partnerA, partnerB) : new Pair(partnerA);
+        System.out.println(newPair); // for test purposes
         return "list";
     }
 
+    // doesn't work
     @RequestMapping(value="/list", params="generateConfig", method=RequestMethod.POST)
     public String createConfigFile() {
         System.out.println("Generating Config File");
+
+        //TODO will generate the configuration file that will be read in?
+
         return "list";
     }
 

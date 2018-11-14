@@ -1,0 +1,65 @@
+/*
+
+Author: Glenn Skelton
+Last Modified: November 13, 2018
+
+*/
+
+
+body {
+    background-color: rgba(60,143,0,0.75);
+    text-align:
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+div {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+.mainTitle {
+    font-family: "Open Sans", sans-serif;
+    font-weight: bold
+    padding: 1px 1.875em .7em
+
+}
+
+.nav-main {
+    border: 3px solid black;
+    background-color: rgba(60,0,0,0.75);
+    background: linear-gradient(to bottom left, rgba(60,0,0,0.75), red)
+}
+
+.headerLinks {
+    background-color: royal red;
+}
+
+.nav-main li {
+    display: inline-block;
+}
+
+.nav-main a {
+    color: #292929;
+    display: inline-block;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: .5em 1.15em .5em 1.4em
+
+}
+
+.mainTitle {
+    font-weight: bold;
+    font-family: Verdana;
+    letter-spacing: 0.1em;
+    text-align: center;
+}
+
+.appDesc {
+    text-align: center;
+}
+
+footer {
+    text-align: center;
+}
