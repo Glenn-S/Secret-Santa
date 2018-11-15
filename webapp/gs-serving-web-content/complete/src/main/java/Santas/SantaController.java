@@ -46,11 +46,13 @@ public class SantaController {
         // need to check and make sure no duplicates are being added
         for (Pair p : pairings) {
             if (p.exists(newPair)) {
-                // print error message
+                // if person has already been entered don't add again
                 model.put("message", "A name you entered already exists in the database");
                 return "list"; // don't add the pair since one of the names already exists
             }
         }
+
+        // give user confirmation message
         if (newPair.size() == 1) {
             retMsg = newPair.getPartnerA() + " has been added!";
             pairings.add(newPair);
@@ -61,8 +63,8 @@ public class SantaController {
         }
         else retMsg = "Error in adding pair, please try again";
 
-        model.put("message", retMsg); // print out user message
 
+        model.put("message", retMsg); // print out user message
         return "list";
     }
 

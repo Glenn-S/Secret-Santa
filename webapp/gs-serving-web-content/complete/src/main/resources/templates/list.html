@@ -45,8 +45,6 @@
                 <!-- Submit Button -->
                 <input type="submit" name="submit" value="Add" class="btn" />
 
-                <!-- print out confirmation or error message -->
-                <p th:text="${message}" /> <!-- doesn't appear to work, don't know why -->
             </fieldset>
         </form>
 
@@ -63,6 +61,8 @@
         <!-- go back to the main page -->
         <input type="button" name="goHome" onclick="location.href='/'" value="Home" class="btn" />
 
+        <!-- print out confirmation or error message -->
+        <p th:text="${message}" /> <!-- doesn't appear to work, don't know why -->
 
     </main>
 

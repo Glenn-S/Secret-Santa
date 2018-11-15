@@ -91,13 +91,27 @@ public class Pair {
         else return null;
     }
 
+    /**
+     * Purpose: To determine if any person in a pair exists in the database
+     * already.
+     * @param pair
+     * @return
+     */
     public Boolean exists(Pair pair) {
-        Boolean exists = this.getPartnerA().equals(pair.getPartnerA()) ||
-                         this.getPartnerB().equals(pair.getPartnerB()) ||
-                         this.getPartnerA().equals(pair.getPartnerB()) ||
-                         this.getPartnerB().equals(pair.getPartnerA());
-        return exists; // if name is already in the table it should not be allowed again
+        Boolean exists = false;
 
+        if (pair.size() == 1) { // done to ensure null doesn't throw things off
+            exists = this.getPartnerA().equals(pair.getPartnerA()) ||
+                     this.getPartnerB().equals(pair.getPartnerA());
+        }
+        else if (pair.size() == 2) {
+            exists = this.getPartnerA().equals(pair.getPartnerA()) ||
+                     this.getPartnerB().equals(pair.getPartnerA()) ||
+                     this.getPartnerA().equals(pair.getPartnerB()) ||
+                     this.getPartnerB().equals(pair.getPartnerB());
+        }
+
+        return exists;
     }
 
     /**
