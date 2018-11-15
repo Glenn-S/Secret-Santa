@@ -95,7 +95,7 @@ public class Pair {
      * Purpose: To determine if any person in a pair exists in the database
      * already.
      * @param pair
-     * @return
+     * @return exists - boolean value that is true if pair has a person in common
      */
     public Boolean exists(Pair pair) {
         Boolean exists = false;
@@ -117,7 +117,7 @@ public class Pair {
     /**
      * Purpose: Returns true if the pairs have a name in common
      * else false.
-     * @return Boolean - true if pair passed in matches exisiting couples
+     * @return Boolean - true if pair passed in matches existing couples
      * pairing else false
      */
     public Boolean compare(Pair pair) {
