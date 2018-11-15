@@ -23,9 +23,11 @@
             <input type="submit" value="Submit" />
         </form>
 
-        <!-- return with list intact -->
+        <!-- return with list -->
         <form method="get" action="goBack">
+            <!-- if returnToList is called and a new name is added, the generator will be re instantiated upon return -->
             <input type="submit" name="returnToList" value="Go Back" />
+            <!-- clear entries will completely empty the list -->
             <input type="button" onclick="location.href='list'" value="Clear Entries" />
         </form>
 

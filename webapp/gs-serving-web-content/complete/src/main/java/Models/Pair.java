@@ -3,7 +3,7 @@ package Models;
 /***********************************************************
  * @author Glenn Skelton
  * @version 1.0
- * Last modified: @{date}
+ * Last Modified by Glenn Skelton: 14-11-2018
  *
  * Purpose: Class for storing unordered pairs of partners.
  ***********************************************************/

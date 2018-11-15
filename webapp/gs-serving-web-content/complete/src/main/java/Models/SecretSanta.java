@@ -3,7 +3,7 @@ package Models;
 /******************************************************
  * @author Glenn Skelton
  * @version 1.0
- * Last modified: @{date}
+ * Last Modified by Glenn Skelton: 14-11-2018
  *
  * Purpose: A Secret Santa pairings generator which
  * creates the unique pairings for a group of any size
@@ -11,6 +11,7 @@ package Models;
  * ensure that they do not end up with each other.
  * HAPPY HOLIDAYS!
  ******************************************************/
+
 import org.springframework.util.ResourceUtils;
 
 import java.util.ArrayList;
@@ -37,7 +38,7 @@ public class SecretSanta {
 
     /*********************** CONSTRUCTORS **********************/
     public SecretSanta() {
-        // instantiate the tables and pick the random set
+        // instantiate the tables and pick the random set from generic file
         parseConfigFile(FILE);
         generateTables(santaPairs);
         pickRandomPairs();
@@ -45,20 +46,22 @@ public class SecretSanta {
 
     public SecretSanta(String filename) {
         FILE = filename == null ? FILE : new String(filename);
-
-        // instantiate the tables and pick the random set
+        // instantiate the tables and pick the random set from file passed in
         parseConfigFile(FILE);
         generateTables(santaPairs);
         pickRandomPairs();
     }
 
     public SecretSanta(ArrayList<Pair> pairings) {
-        // instantiate the tables and pick the random set
+        // instantiate the tables and pick the random set based on pairs passed in
         setPairs(pairings); // sets the initial pairs
         generateTables(santaPairs);
         pickRandomPairs();
         System.out.println("final pairs size : " + finalPairs.size());
     }
+
+
+
 
 
     /******************** HELPER METHODS ***********************/
@@ -145,6 +148,9 @@ public class SecretSanta {
         }
         return;
     }
+
+
+
 
 
 
