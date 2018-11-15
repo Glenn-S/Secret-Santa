@@ -61,6 +61,7 @@ Last Modified by Glenn Skelton 14-11-2018
         </form>
 
 
+        <!-- TODO this should not be enabled until you have a certain number of entries -->
         <!-- continue on to the santa page -->
         <input type="button" name="gotoSanta" onclick="location.href='santa'" value="Finish" class="btn" />
 
@@ -69,8 +70,11 @@ Last Modified by Glenn Skelton 14-11-2018
         <input type="button" name="goHome" onclick="location.href='/'" value="Home" class="btn" />
 
         <!-- print out confirmation or error message -->
-        <p th:text="${message}" /> <!-- doesn't appear to work, don't know why -->
+        <p th:text="${errorMessage}" /> <!-- doesn't appear to work, don't know why -->
 
+        <h1>Current Entries</h1>
+        <p id="currentUsers" th:each="name : ${names}"
+           th:text="${name}"></p>
     </main>
 
 </body>

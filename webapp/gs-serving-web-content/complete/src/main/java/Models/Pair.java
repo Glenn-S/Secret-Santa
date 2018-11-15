@@ -39,7 +39,7 @@ public class Pair {
 
 
     /********************** SETTERS/GETTERS ***********************/
-
+    //TODO we probably don't need all these 'purpose' comments for relatively simple functions, it seems cluttered
     /**
      * Purpose: To retrieve partnerA.
      * @return String - the name of the person stored in partnerA.
@@ -142,5 +142,12 @@ public class Pair {
         return "(" + getPartnerA() + ", " + getPartnerB() + ")";
     }
 
+    public boolean hasPartnerA() {
+        return partnerA != null;
+    }
+
+    public boolean hasPartnerB() {
+        return partnerB != null;
+    }
 }
 
