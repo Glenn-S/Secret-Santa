@@ -1,47 +1,58 @@
-<!--
-
-Last Modified by Glenn Skelton 14-11-2018
-
--->
-
-
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head> 
     <title>Secret Santa</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+    <script src="js/santa.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="css/santa.css"/>
 </head>
 <body>
-    <header role="banner">
-        <h1>Time To Find Your Secret Santa!</h1>
+    <!--<header role="banner">-->
+        <!--<h1>Time To Find Your Secret Santa!</h1>-->
+    <!--</header>-->
+    <header role="banner" class="headerBanner">
+        <img src="images/SecretSantaHeader.png" id="secretSantaHeader" class="headerImage" />
+        <img src="images/SantaShush.jpg" class="headerImage" />
     </header>
 
     <main>
-        <form method="post" action="santa">
-            <p>Full Name: <input type="text"
-                                 maxlength="255"
-                                 autocomplete="true"
-                                 autofocus="true"
-                                 autocapitalize="on"
-                                 placeholder="ie. Jane Doe"
-                                 required
-                                 name="santaName" /></p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Santa</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="pair : ${pairings}">
+                    <td th:text="${pair.getPartnerA()}"></td>
+                    <td th:id="${pair.getPartnerA()} +'santa'" class="santa" th:text="${pair.getPartnerB()}"></td>
+                    <td><button th:id="${pair.getPartnerA()}" onclick="showSanta(this.id)">Show Santa</button></td>
+                </tr>
+            </tbody>
+        </table>
 
-            <input type="submit" value="Submit" />
-        </form>
-
-        <!-- return with list -->
-        <form method="get" action="goBack">
-            <!-- if returnToList is called and a new name is added, the generator will be re instantiated upon return -->
-            <input type="submit" name="returnToList" value="Go Back" />
-            <!-- clear entries will completely empty the list -->
-            <input type="button" onclick="location.href='list'" value="Clear Entries" />
-        </form>
-
-
-        <!-- appears only when user presses submit -->
-        <p th:text="${santaPick}" />
     </main>
+
+
+    <!--<main>-->
+        <!--<form method="post" action="santa">-->
+            <!--<p>Full Name: <input type="text"-->
+                                 <!--maxlength="255"-->
+                                 <!--autocomplete="true"-->
+                                 <!--autofocus="true"-->
+                                 <!--autocapitalize="on"-->
+                                 <!--placeholder="ie. Jane Doe"-->
+                                 <!--required-->
+                                 <!--name="santaName" /></p>-->
+
+            <!--<input type="submit" value="Submit" />-->
+        <!--</form>-->
+
+        <!--&lt;!&ndash; appears only when user presses submit &ndash;&gt;-->
+        <!--<p th:text="${santaPick}" />-->
+    <!--</main>-->
 
 </body>
 </html>

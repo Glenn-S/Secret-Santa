@@ -1,0 +1,23 @@
+/*
+
+Author: Glenn Skelton
+Last Modified: November 14, 2018
+
+*/
+
+.headerBanner {
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+.headerImage {
+    height: 250px
+}
+#secretSantaHeader {
+    width: 60%;
+    padding-right: 50px;
+}
+
+body {
+    margin-left: 100px;
+    margin-right: 100px
+}

@@ -92,9 +92,9 @@ public class SantaController {
     @GetMapping("/santa")
     public String santaFormGet(ModelMap model) {
         // read in the pairings entered by the user and generate pairings
-        ss = new SecretSanta(pairings); //TODO move to init
+        ss = new SecretSanta(pairings);
 
-        model.addAttribute("santaPick", "Hello");
+        model.addAttribute("pairings", ss.getFinalPairs());
         return "santa"; // get request to return the santa.html page
     }
 
