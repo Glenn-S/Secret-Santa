@@ -1,9 +1,14 @@
 $( document ).ready(function() {
     console.log( "ready!" );
-    $('.santa').hide();
+    hideAllSantas();
 });
+
+function hideAllSantas() {
+    $('.santa').css('visibility', 'hidden');
+}
 
 function showSanta(id) {
     console.log("glenn smells like pooop!");
-    $("#"+id+"santa").toggle();
+    $('.santa').css('visibility', 'hidden');
+    $("#"+id+"santa").css('visibility', 'visible');
 }
