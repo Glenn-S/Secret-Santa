@@ -5,7 +5,7 @@ Last Modified: November 14, 2018
 
 */
 
-input[type=text] {
+btnDiv.input[type=text] {
     width: 100%;
     padding: 12px 30px;
     margin: 8px 0;
@@ -24,7 +24,7 @@ input[type=text]:focus {
     border: 3px solid #555;
 }
 
-input[type=submit], input[type=button] {
+btnDiv.input[type=submit], btnDiv.input[type=button] {
     background-color: blue;
     border: none;
     color: white;
@@ -36,14 +36,14 @@ input[type=submit], input[type=button] {
     height: 20%;
     text-transform: uppercase;
     font-size: 12px;
-    -webkit-transition-duration: 0.6s; /* Safari */
+    -webkit-transition-duration: 0.6s;
     transition-duration: 0.6s;
 
 }
 
 
 input[type=submit]:hover, input[type=button]:hover {
-    background-color: #4CAF50; /* Green */
+    background-color: #4CAF50;
     color: white;
 }
 
@@ -54,7 +54,6 @@ form {
 
 
 body {
-    background-image: url("images/christmas_background.jpg");
     background-color: black;
     background-position: center;
     background-size: cover;

@@ -10,64 +10,64 @@ Last Modified by Glenn Skelton 14-11-2018
 <head>
     <title>Santas List</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="css/list.css"/>
 </head>
-<body>
+<body style="background-image: url(images/christmas_background.jpg);">
     <main>
     <!-- need to style with CSS -->
 
         <form method="post" action="listEntry">
-            <fieldset>
-                <h4>Secret Santa Registry</h4>
 
-                <!-- need to link up to the SantaController to add names to the list -->
-                <p class="name_input">
-                    <label>Full Name:</label>
-                    <input type="text"
-                           maxlength="255"
-                           autocomplete="true"
-                           autofocus="true"
-                           autocapitalize="on"
-                           placeholder="ie. Jane Doe"
-                           required
-                           name="partnerA"
-                           class="names" />
-                    <!-- input needs to be checked to make sure that there are no free hyphens since that is what is used
-                    for parsing the config.txt file -->
+            <h4>Secret Santa Registry</h4>
 
-                </p>
-                <p class="name_input">
-                    <label>Partners Name:</label>
-                    <input type="text"
-                           maxlength="255"
-                           autocomplete="true"
-                           autocapitalize="on"
-                           placeholder="Optional"
-                           name="partnerB"
-                           class="names"  />
-                </p>
+            <!-- need to link up to the SantaController to add names to the list -->
+            <p class="name_input">
+                <label>Full Name:</label>
+                <input type="text"
+                       maxlength="255"
+                       autocomplete="true"
+                       autofocus="true"
+                       autocapitalize="on"
+                       placeholder="ie. Jane Doe"
+                       required
+                       name="partnerA"
+                       class="names" />
+                <!-- input needs to be checked to make sure that there are no free hyphens since that is what is used
+                 for parsing the config.txt file -->
 
-                <!-- I want to make an admin login page possibly for authentication and to store associated santa file?
-                That or each person registers so that they can retrieve only their own secret santa pick  maybe?-->
+            </p>
+            <p class="name_input">
+                <label>Partners Name:</label>
+                <input type="text"
+                       maxlength="255"
+                       autocomplete="true"
+                       autocapitalize="on"
+                       placeholder="Optional"
+                       name="partnerB"
+                       class="names"  />
+            </p>
 
-                <!-- Submit Button -->
-                <input type="submit" name="submit" value="Add" class="btn" />
+            <!-- I want to make an admin login page possibly for authentication and to store associated santa file?
+             That or each person registers so that they can retrieve only their own secret santa pick  maybe?-->
 
-            </fieldset>
+            <div name="btnDiv">
+            <!-- Submit Button -->
+            <input type="submit" name="submit" value="Add" class="btn" />
+
+            <!-- Clear Form Entries -->
+            <form method="post" action="clearEntries">
+                <input type="submit" name="clear" value="Clear" class="btn" />
+            </form>
+
+            <!-- TODO this should not be enabled until you have a certain number of entries -->
+            <!-- continue on to the santa page -->
+            <input type="button" name="gotoSanta" onclick="location.href='santa'" value="Finish" class="btn" />
+
+
+            <!-- go back to the main page -->
+            <input type="button" name="goHome" onclick="location.href='/'" value="Home" class="btn" />
+            </div>
         </form>
-
-        <!-- Clear Form Entries -->
-        <form method="post" action="clearEntries">
-            <input type="submit" name="clear" value="Clear" class="btn" />
-        </form>
-
-
-        <!-- TODO this should not be enabled until you have a certain number of entries -->
-        <!-- continue on to the santa page -->
-        <input type="button" name="gotoSanta" onclick="location.href='santa'" value="Finish" class="btn" />
-
-
-        <!-- go back to the main page -->
-        <input type="button" name="goHome" onclick="location.href='/'" value="Home" class="btn" />
 
         <!-- print out confirmation or error message -->
         <p th:text="${errorMessage}" /> <!-- doesn't appear to work, don't know why -->
