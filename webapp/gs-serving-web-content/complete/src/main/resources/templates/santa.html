@@ -1,42 +1,65 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head> 
+<head>
     <title>Secret Santa</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js" type="text/javascript"></script>
     <script src="js/santa.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/santa.css"/>
 </head>
 <body>
-    <!--<header role="banner">-->
-        <!--<h1>Time To Find Your Secret Santa!</h1>-->
-    <!--</header>-->
-    <header role="banner" class="headerBanner">
-        <img src="images/SecretSantaHeader.png" id="secretSantaHeader" class="headerImage" />
-        <img src="images/SantaShush.jpg" class="headerImage" />
-    </header>
+<header role="banner" class="headerBanner">
+    <img src="images/SecretSantaHeader.png" id="secretSantaHeader" class="headerImage" />
+    <img src="images/SantaShush.jpg" id="santaShush" class="headerImage" />
+</header>
 
-    <main>
-        <div id="wrapper">
-            <button onclick="hideAllSantas()">Hide Santas</button>
-            <table id="keywords" cellspacing="0" cellpadding="0">
-                <thead>
-                    <tr>
-                        <th><span>Name</span></th>
-                        <th><span>Santa</span></th>
-                        <th><span></span></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="pair : ${pairings}">
-                        <td class="lalign" th:text="${pair.getPartnerA()}"></td>
-                        <td th:id="${pair.getPartnerA()} +'santa'" class="santa" th:text="${pair.getPartnerB()}"></td>
-                        <td><button th:id="${pair.getPartnerA()}" onclick="showSanta(this.id)">Show Santa</button></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </main>
+<div class="santa">
+    <div class="circles"></div>
+    <div class="snow"></div>
+    <div class="hat">
+        <div class="hat-end"></div>
+    </div>
+    <div class="face">
+        <div class="eyes"></div>
+        <div class="mouth"></div>
+    </div>
+    <div class="dirty-overflow">
+        <div class="body"></div>
+    </div>
+</div>
+
+<div id="buttonDiv">
+    <button class="button-secondary pure-button" onclick="hideAllSantas()">
+        <i class="fa fa-history"></i>
+        Hide All Santas
+    </button>
+</div>
+
+<main>
+    <div id="wrapper">
+        <table id="keywords" cellspacing="0" cellpadding="0">
+            <thead>
+            <tr>
+                <th><span>Name</span></th>
+                <th><span>Santa</span></th>
+                <th><span></span></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="pair : ${pairings}">
+                <td th:text="${pair.getPartnerA()}"></td>
+                <td th:id="${pair.getPartnerA()} +'santa'" class="santa" th:text="${pair.getPartnerB()}"></td>
+                <td><button class="button-secondary pure-button" th:id="${pair.getPartnerA()}" onclick="showSanta(this.id)">
+                    <i class="fa fa-gift"></i>
+                    Show
+                </button></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
 
 
 </body>

@@ -1,25 +1,35 @@
-/*
-
-Author: Glenn Skelton
-Last Modified: November 14, 2018
-
-*/
-
 .headerBanner {
     margin-top: 25px;
     margin-bottom: 25px;
+    margin: auto;
+    width: 100%;
+    padding: 10px;
+    text-align: center;
 }
 .headerImage {
     height: 250px
 }
 #secretSantaHeader {
-    width: 60%;
+    width: 50%;
     padding-right: 50px;
+}
+#santaShush {
+    width: 40%;
+}
+#main {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+    text-align: center;
 }
 
 body {
     margin-left: 100px;
-    margin-right: 100px
+    margin-right: 100px;
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+    text-align: center;
 }
 
 @import url('https://fonts.googleapis.com/css?family=Amarante');
@@ -63,7 +73,6 @@ h1 {
 /** page structure **/
 #wrapper {
   display: block;
-  width: 850px;
   background: #fff;
   margin: 0 auto;
   padding: 10px 17px;
@@ -112,4 +121,16 @@ h1 {
 }
 #keywords tbody tr td.lalign {
   text-align: left;
+}
+#buttonDiv {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+    text-align: center;
+}
+.button-secondary {
+    background: rgb(66, 184, 221); /* this is a light blue */
+    color: white;
+    border-radius: 4px;
+    text-shadow:
 }
